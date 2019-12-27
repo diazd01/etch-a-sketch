@@ -81,11 +81,11 @@ if (controller) {
         let errors = true;
         while (errors) {
             if (isNaN(userInput)) {
-                userInput = prompt('Must be a number, try again');
-            } else if (userInput < 0) {
-                userInput = prompt('Must be a positive number');
+                userInput = prompt('Must be a number, try again.');
+            } else if (userInput <= 0) {
+                userInput = prompt('Must be a positive number/greater than zero. Try again.');
             } else if (userInput > 100) {
-                userInput = prompt('Must be less than 99');
+                userInput = prompt('99 squares max. Try again.');
             }
             if (!isNaN(userInput) && userInput > 0 && userInput < 100) {
                 errors = false;
