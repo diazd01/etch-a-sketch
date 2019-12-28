@@ -1,3 +1,4 @@
+/* Setting the grid as variable */
 const grid = document.querySelector('.grid');
 let defaultSize = 16;
 /* setting default color variable */
@@ -11,17 +12,18 @@ const addDivsToGrid = function (size) {
         const createDiv = document.createElement('div');
         grid.appendChild(createDiv);
     }
+    hover(color);
+}
+/* HOVER */
+const hover = function (color) {
 
-    /* HOVER */
     const gridDiv = document.querySelectorAll('.grid > div');
 
-    if (gridDiv) {
-        gridDiv.forEach((div) => {
-            div.addEventListener("mousemove", (e) => {
-                e.target.style.backgroundColor = color;
-            });
+    gridDiv.forEach((div) => {
+        div.addEventListener("mouseover", (e) => {
+            return e.target.style.backgroundColor = color;
         });
-    }
+    });
 
 }
 // /* Set grid function: */
@@ -56,20 +58,34 @@ if (controller) {
     /* Default Button */
     defaultBtn.addEventListener('click', (e) => {
         color = "#2b2b2b";
+        hover(color);
     });
     /* Lite Button */
     liteBtn.addEventListener('click', (e) => {
         color = "#C0C0C0";
+        hover(color);
     });
     /* RGB Button */
-    rgbBtn.addEventListener('click', (e) => {
-        let r = Math.floor(Math.random() * (255 - 0 + 1));
-        let g = Math.floor(Math.random() * (255 - 0 + 1));
-        let b = Math.floor(Math.random() * (255 - 0 + 1));
+    if (rgbBtn) {
+        rgbBtn.addEventListener('click', (e) => {
 
-        color = `rgb(${r}, ${g}, ${b})`;
-        console.log(color);
-    });
+            const gridDiv = document.querySelectorAll('.grid > div');
+
+            gridDiv.forEach((div) => {
+                div.addEventListener("mouseover", (e) => {
+
+                    let r = Math.floor(Math.random() * (255 - 0 + 1));
+                    let g = Math.floor(Math.random() * (255 - 0 + 1));
+                    let b = Math.floor(Math.random() * (255 - 0 + 1));
+                    color = `rgb(${r}, ${g}, ${b})`;
+                    console.log(color);
+
+                    e.target.style.backgroundColor = color;
+                });
+            });
+        });
+    }
+
 
     clearBtn.addEventListener('click', (e) => {
         // gridDiv.forEach((div) => {
@@ -91,6 +107,7 @@ if (controller) {
                 errors = false;
             }
         }
+        color = "#2b2b2b";
         clearDivs();
         addDivsToGrid(userInput);
         setGrid(userInput);
